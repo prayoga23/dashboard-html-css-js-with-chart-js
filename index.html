@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sales Analytics & Data Visualization Dashboard - HTML5, CSS3, JS, Chart.js">
+    <title>Sales Analytics Dashboard - Data Visualization</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Remixicon CDN for Modern UI Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Custom CSS Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- ========================================================= -->
+        <!-- 1. Sidebar Navigation                                      -->
+        <!-- ========================================================= -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html" class="brand-logo">
+                    <div class="brand-icon">
+                        <i class="ri-bar-chart-box-fill"></i>
+                    </div>
+                    <span>SalesViz</span>
+                </a>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link active">
+                        <i class="ri-dashboard-3-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#sales-trend" class="nav-link">
+                        <i class="ri-line-chart-line"></i>
+                        <span>Sales Analytics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#category-sales" class="nav-link">
+                        <i class="ri-pie-chart-line"></i>
+                        <span>Category Breakdown</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#recent-transactions" class="nav-link">
+                        <i class="ri-file-list-3-line"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">AD</div>
+                    <div class="user-info">
+                        <div class="user-name">Admin User</div>
+                        <div class="user-role">Full Stack Developer</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ========================================================= -->
+        <!-- 2. Main Wrapper & Header Navbar                           -->
+        <!-- ========================================================= -->
+        <div class="main-wrapper">
+            
+            <!-- Navbar Header -->
+            <header class="navbar">
+                <div class="navbar-left">
+                    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation">
+                        <i class="ri-menu-2-line"></i>
+                    </button>
+                    <h1 class="page-title">Sales Analytics Overview</h1>
+                </div>
+
+                <div class="navbar-right">
+
+                    <!-- Add Transaction Button -->
+                    <button class="btn-primary" id="btn-add-transaction">
+                        <i class="ri-add-line"></i>
+                        <span>Tambah Transaksi</span>
+                    </button>
+
+                    <!-- Refresh Button -->
+                    <button class="btn-secondary refresh-btn" id="refresh-btn" title="Muat Ulang Data">
+                        <i class="ri-refresh-line"></i>
+                        <span>Refresh</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="content-area">
+
+                <!-- ---------------------------------------------------- -->
+                <!-- Summary KPI Cards Row (4 Cards)                      -->
+                <!-- ---------------------------------------------------- -->
+                <section class="summary-grid">
+                    
+                    <!-- 1. Total Revenue -->
+                    <div class="kpi-card revenue">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Total Revenue</span>
+                            <div class="kpi-icon">
+                                <i class="ri-wallet-3-line"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpi-total-revenue">Rp 218.320.000</div>
+                        <div class="kpi-footer">
+                            <span class="badge-growth positive">
+                                <i class="ri-arrow-up-line"></i> +14.2%
+                            </span>
+                            <span>vs bulan lalu</span>
+                        </div>
+                    </div>
+
+                    <!-- 2. Total Sales -->
+                    <div class="kpi-card sales">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Total Sales</span>
+                            <div class="kpi-icon">
+                                <i class="ri-shopping-cart-2-line"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpi-total-sales">32</div>
+                        <div class="kpi-footer">
+                            <span class="badge-growth positive">
+                                <i class="ri-arrow-up-line"></i> +8.5%
+                            </span>
+                            <span>vs bulan lalu</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. Total Customer -->
+                    <div class="kpi-card customers">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Total Customer</span>
+                            <div class="kpi-icon">
+                                <i class="ri-user-heart-line"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpi-total-customers">15</div>
+                        <div class="kpi-footer">
+                            <span class="badge-growth positive">
+                                <i class="ri-arrow-up-line"></i> +12.0%
+                            </span>
+                            <span>pelanggan aktif</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. Total Product -->
+                    <div class="kpi-card products">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Total Product</span>
+                            <div class="kpi-icon">
+                                <i class="ri-price-tag-3-line"></i>
+                            </div>
+                        </div>
+                        <div class="kpi-value" id="kpi-total-products">14</div>
+                        <div class="kpi-footer">
+                            <span class="badge-growth positive">
+                                <i class="ri-check-line"></i> In Stock
+                            </span>
+                            <span>produk terdaftar</span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- ---------------------------------------------------- -->
+                <!-- Charts Grid Section 1: Line Chart & Bar Chart        -->
+                <!-- ---------------------------------------------------- -->
+                <section class="charts-grid-main">
+                    
+                    <!-- Line Chart: Monthly Sales Trend -->
+                    <div class="dashboard-card" id="sales-trend">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <h3>Trend Penjualan Bulanan</h3>
+                                <p>Pendapatan (Revenue) & Kuantitas Terjual per Bulan (2026)</p>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="monthlyTrendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Bar Chart: Category Sales -->
+                    <div class="dashboard-card" id="category-sales">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <h3>Penjualan per Kategori</h3>
+                                <p>Perbandingan Pendapatan berdasarkan Kategori Produk</p>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="categoryBarChart"></canvas>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- ---------------------------------------------------- -->
+                <!-- Charts Grid Section 2: Pie Chart & Recent Table      -->
+                <!-- ---------------------------------------------------- -->
+                <section class="charts-grid-secondary">
+
+                    <!-- Doughnut Chart: Product Distribution -->
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <h3>Distribusi Produk Terlaris</h3>
+                                <p>Pangsa Produk berdasarkan Kuantitas Terjual</p>
+                            </div>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="productPieChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Data Table Card: Transaksi Penjualan Terbaru -->
+                    <div class="dashboard-card" id="recent-transactions">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <h3>Transaksi Penjualan Terbaru</h3>
+                                <p>Daftar transaksi penjualan real-time & pencarian interaktif</p>
+                            </div>
+
+                            <!-- Filter & Search Bar Controls -->
+                            <div class="filter-group">
+                                <div class="nav-search">
+                                    <i class="ri-search-line"></i>
+                                    <input type="text" id="table-search-input" placeholder="Cari nama, TRX, produk...">
+                                </div>
+                                <select class="select-control" id="filter-category-select">
+                                    <option value="all">Semua Kategori</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Home & Living">Home & Living</option>
+                                    <option value="Fashion">Fashion</option>
+                                    <option value="Books">Books</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID TRX</th>
+                                        <th>Pelanggan</th>
+                                        <th>Produk</th>
+                                        <th>Kategori</th>
+                                        <th>Qty</th>
+                                        <th>Total Subtotal</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-sales-tbody">
+                                    <tr>
+                                        <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 20px;">
+                                            Memuat data transaksi...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+            </main>
+        </div>
+
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- Modal: Tambah Transaksi Baru                              -->
+    <!-- ========================================================= -->
+    <div class="modal-overlay" id="add-transaction-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Tambah Transaksi Penjualan</h3>
+                <button class="close-modal" id="btn-close-modal"><i class="ri-close-line"></i></button>
+            </div>
+            <form id="form-add-transaction">
+                <div class="form-group">
+                    <label for="input-customer-name">Nama Pelanggan</label>
+                    <input type="text" class="form-input" id="input-customer-name" placeholder="Misal: Giri Wijaya" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-product-name">Nama Produk</label>
+                    <input type="text" class="form-input" id="input-product-name" placeholder="Misal: Laptop Pro 15-inch" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="input-category">Kategori</label>
+                        <select class="form-input" id="input-category" required>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Home & Living">Home & Living</option>
+                            <option value="Fashion">Fashion</option>
+                            <option value="Books">Books</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-quantity">Kuantitas (Qty)</label>
+                        <input type="number" class="form-input" id="input-quantity" value="1" min="1" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-price">Harga per Unit (Rp)</label>
+                    <input type="number" class="form-input" id="input-price" placeholder="Misal: 15000000" required>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="ri-check-line"></i> Simpan Transaksi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Chart.js Library v4 from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom Frontend JavaScript Modules -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/charts.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
